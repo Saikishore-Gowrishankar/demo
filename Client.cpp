@@ -22,7 +22,7 @@ int main()
     
     sf::Packet packet;
     std::string s;
-    std::ofstream out_midi("out.midi", std::ios::out | std::ios::binary);
+    std::ofstream out_midi("out.mid", std::ios::out | std::ios::binary);
     
     socket.receive(packet);
 

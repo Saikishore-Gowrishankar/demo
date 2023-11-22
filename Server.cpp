@@ -52,6 +52,7 @@ int main()
     
     while(true)
     {
+        std::cout << "Enter a command: " << std::flush;
         std::string input;
         sf::Packet p;
         std::cin >> input;

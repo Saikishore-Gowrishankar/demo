@@ -27,19 +27,21 @@ int main()
     socket.receive(packet);
 
     packet >> s;
-    std::cout << s;
+    std::cout << "Received MIDI. Saving as out.mid\n";
     out_midi << s;
     
     socket.setBlocking(false);
+    std::cout << "TCP socket set to blocking. Awaiting incoming commands from server\n";
     while(true)
     {
         sf::Packet p;
-        std::string str = "";
+        std::string command = "";
         if(socket.receive(p) == sf::Socket::Done) 
         {
-            p >> str;
-            std::cout << "Received a command: " << str << std::endl;
-            str = "";
+            p >> command;
+            std::cout << "Received a command: " << command << std::endl;
+            if(command == "q") return 0;
+            command = "";
         }
     }
 }

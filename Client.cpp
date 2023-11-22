@@ -29,4 +29,17 @@ int main()
     packet >> s;
     std::cout << s;
     out_midi << s;
+    
+    socket.setBlocking(false);
+    while(true)
+    {
+        sf::Packet p;
+        std::string str = "";
+        if(socket.receive(p) == sf::Socket::Done) 
+        {
+            p >> str;
+            std::cout << "Received a command: " << str << std::endl;
+            str = "";
+        }
+    }
 }

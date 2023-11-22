@@ -38,9 +38,25 @@ int main()
     std::stringstream midi_data;
     midi_data << midi.rdbuf();
     
+    //Validate midi
+    if(midi_data.str().substr(0,4) != "MThd")
+    {
+        std::cerr << "Header does not seem to be valid.\n";
+        return 1;
+    }
+    
     sf::Packet midi_packet;
     midi_packet << midi_data.str();
     
     client.send(midi_packet);
+    
+    while(true)
+    {
+        std::string input;
+        sf::Packet p;
+        std::cin >> input;
+        p << input;
+        client.send(p);
+    }
     
 }
